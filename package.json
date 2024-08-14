@@ -1,9 +1,20 @@
 {
   "dependencies": {
+    "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.5.2"
+    "express-fileupload": "^1.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "middleware": "^1.0.0",
+    "mongod": "^2.0.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.4.0",
+    "node": "^21.7.0",
+    "nodemailer": "^6.9.13",
+    "vuex": "^4.1.0"
   },
   "name": "gamezone",
   "version": "1.0.0",
