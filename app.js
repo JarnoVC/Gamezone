@@ -20,12 +20,14 @@ app.use(express.json());
 const userRoutes = require('./routes/api/v1/UserRoutes');
 const productRoutes = require('./routes/api/v1/ProductRoutes');
 const orderRoutes = require('./routes/api/v1/OrderRoutes');
+const authRoutes = require('./routes/api/v1/Authroutes');
 
 
 
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 // connect to database
 mongoose.connect(mongodbUri);
