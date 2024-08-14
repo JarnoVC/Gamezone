@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     title: { 
         type: String, 
-        required: true 
+        required: false 
     },
     description: { 
         type: String, 
-        required: true 
+        required: false 
     },
     price: { 
         type: Number, 
-        required: true 
+        required: false 
     },
     image: { 
         type: String 
@@ -20,4 +20,6 @@ const productSchema = new Schema({
 });
 
 const Product = mongoose.model('Product', productSchema);
-module.exports = Product;
+module.exports = {
+    Product,
+};
