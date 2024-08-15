@@ -85,7 +85,7 @@ JWT_SECRET=your_jwt_secret
 To start the server, use the following command:
 
 ```bash
-npm start
+node app.js
 ```
 
 The server will start on the port specified in the `.env` file, or the default port 3000.
