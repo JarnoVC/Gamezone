@@ -1,5 +1,4 @@
-// controllers/AuthController.js
-const User = require('../models/User');
+const {User} = require('../../../models/api/v1/User');
 const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res) => {
