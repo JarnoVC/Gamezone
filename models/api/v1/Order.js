@@ -7,16 +7,16 @@ const orderSchema = new Schema({
         ref: 'Product', 
         required: true 
     },
-    title: [{ 
+    title: { 
         type: String, 
         ref: 'title', 
         required: true 
-    }],
-    description: [{ 
+    },
+    description: { 
         type: String, 
         ref: 'description', 
         required: true 
-    }],
+    },
     status: { 
         type: String, 
         enum: ['unshipped', 'shipped'], 
