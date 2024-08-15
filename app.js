@@ -13,7 +13,23 @@ const mongodbUri = process.env.MONGODB_URI;
 
 
 // middleware
-app.use(cors({origin: 'http://localhost:5173'}));
+
+// List of allowed origins
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://gamezone-mis8.onrender.com',
+];
+
+app.use(cors({
+    origin: (origin, callback) => {
+      // Check if the origin is in the allowed origins list
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+}));
 app.use(express.json());
 
 
