@@ -1,6 +1,7 @@
 const { get } = require('http');
 const { Order } = require('../../../models/api/v1/Order');
 const { Product } = require('../../../models/api/v1/Product');
+const { emitOrderUpdate } = require('../../../app'); 
 
 const createOrder = async (req, res) => {
     try {
@@ -24,6 +25,10 @@ const createOrder = async (req, res) => {
       });
   
       await order.save();
+
+      // Emit the event after saving the order
+      emitOrderUpdate(order);
+
       res.status(201).json({ message: 'Order created successfully', order });
     } catch (error) {
       console.error('Error creating order:', error);
@@ -75,6 +80,9 @@ const updateOrderStatus = async (req, res) => {
         if (!order) {
             return res.status(404).json({ message: 'Order not found' });
         }
+
+        // Emit the event after updating the order
+        emitOrderUpdate(order);
 
         res.status(200).json({ message: 'Order status updated', order });
     } catch (error) {
