@@ -8,12 +8,10 @@ const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
     },
     email: {
-        type: string,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
     },
     password: {
         type: String,
@@ -22,7 +20,7 @@ const UserSchema = new Schema({
 });
 
 // Hash the password before saving the user model
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
   
     try {
@@ -35,7 +33,7 @@ userSchema.pre('save', async function (next) {
   });
   
   // Method to compare password for login
-  userSchema.methods.comparePassword = async function (enteredPassword) {
+  UserSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
   };
 
