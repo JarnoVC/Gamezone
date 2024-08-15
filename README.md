@@ -52,7 +52,7 @@ The **GameZone API** is a RESTful API that powers the GameZone web application. 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/gamezone-api.git
+   git clone https://github.com/JarnoVC/Gamezone-frontend.git
    cd gamezone-api
    ```
 
