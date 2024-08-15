@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-
+const { createServer } = require('http'); // Import createServer from http
+const { Server } = require('socket.io'); // Import Server from socket.io
 
 dotenv.config();
 
@@ -32,6 +33,23 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Create HTTP server and bind it with Socket.io
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: allowedOrigins,
+        methods: ["GET", "POST", "PUT", "DELETE"],
+    }
+});
+
+// Function to emit order updates
+const emitOrderUpdate = (order) => {
+    io.emit('orderUpdated', order);
+};
+
+// Export emitOrderUpdate so it can be used in controllers
+module.exports.emitOrderUpdate = emitOrderUpdate;
+
 
 const userRoutes = require('./routes/api/v1/UserRoutes');
 const productRoutes = require('./routes/api/v1/ProductRoutes');
@@ -54,13 +72,24 @@ db.once('open', () => {
     console.log('Connected to database');
 });
 
+// Socket.io connection handler
+io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    // Handle the disconnection event
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send({ message: 'Something broke!' });
 });
 
-app.listen(port, () => {
+// Start the server with the http server, not the express app
+server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
