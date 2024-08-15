@@ -35,6 +35,20 @@ const createProduct = async (req, res) => {
     }
 };
 
+ const deleteProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json({ message: 'Product id is required' });
+        }
+        const deletedProduct = await Product.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Product deleted successfully', data: { deletedProduct } });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to delete product', error });
+    }
+};
+
+
 module.exports = {
-    getAllProducts, createProduct
+    getAllProducts, createProduct, deleteProduct
 };
