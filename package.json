@@ -14,6 +14,7 @@
     "mongoose": "^8.4.0",
     "node": "^21.7.0",
     "nodemailer": "^6.9.13",
+    "socket.io": "^4.7.5",
     "vuex": "^4.1.0"
   },
   "name": "gamezone",
